@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About — FaceVision</title>
+<meta name="description" content="What FaceVision is and how it works.">
+<link rel="stylesheet" href="style.css">
+<!-- AdSense (disabled). After approval, replace ca-pub-XXXXXXXX and uncomment:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
+-->
+</head>
+<body>
+<header class="nav"><a class="brand" href="index.html">Face<span>Vision</span></a>
+<nav class="links" aria-label="Site"><a href="index.html">Home</a><a href="articles/index.html">Articles</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></nav></header>
+<main class="content">
+
+<p class="eyebrow">ABOUT</p><h1>About FaceVision</h1>
+<p class="sub">FaceVision is a free, privacy-first face detection tool that runs entirely in your web browser.</p>
+<h2>Detection, not recognition</h2>
+<p>FaceVision answers one question: <em>where are the faces in this picture?</em> It draws a box around each face and marks a few key points such as the eyes, nose and mouth. It does <strong>not</strong> work out who anyone is, compare faces against a database, or create face "fingerprints".</p>
+<h2>How it works</h2>
+<ol>
+<li>Your browser loads Google's open-source MediaPipe library and a small BlazeFace detection model.</li>
+<li>You choose a photo or start your camera.</li>
+<li>The model runs on your device (using your GPU when available, otherwise your CPU) and returns face positions and confidence scores.</li>
+<li>FaceVision draws the results on top of your image or video.</li>
+</ol>
+<h2>Privacy first</h2>
+<p>Your images and camera frames are processed locally and never uploaded. Usage analytics are off unless you switch them on, and even then only coarse, anonymous events are sent. Read the full <a href="privacy.html">privacy policy</a>.</p>
+<h2>Learn more</h2>
+<p>Curious about the technology? Browse our <a href="articles/index.html">articles</a> on face detection, on-device AI and building your own detector.</p>
+<p>FaceVision is made by [Your Name].</p>
+
+
+</main>
+<footer><nav class="foot-links" aria-label="Footer"><a href="index.html">Home</a> · <a href="articles/index.html">Articles</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></nav>
+<p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 [Your Name]</p></footer>
+</body></html>

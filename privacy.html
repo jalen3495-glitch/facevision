@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy — FaceVision</title>
+<meta name="description" content="How FaceVision handles images, camera frames, analytics and advertising cookies.">
+<link rel="stylesheet" href="style.css">
+<!-- AdSense (disabled). After approval, replace ca-pub-XXXXXXXX and uncomment:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
+-->
+</head>
+<body>
+<header class="nav"><a class="brand" href="index.html">Face<span>Vision</span></a>
+<nav class="links" aria-label="Site"><a href="index.html">Home</a><a href="articles/index.html">Articles</a><a href="about.html">About</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></nav></header>
+<main class="content">
+
+<p class="eyebrow">LEGAL</p><h1>Privacy Policy</h1>
+<p class="meta">Last updated: October 24, 2026</p>
+<p>This policy explains what data FaceVision ("we", "us"), operated by [Your Name] at facevision.js.org, collects and why. FaceVision is a face <em>detection</em> tool: it finds where faces appear in an image. It does not identify people, compare faces, or build face templates.</p>
+
+<h2>1. Images and camera video stay on your device</h2>
+<p>When you choose an image or start your camera, the pictures are processed inside your browser using Google's MediaPipe Face Detector (the BlazeFace short-range model). Images and camera frames are <strong>never uploaded</strong> to us or to our optional analytics server. The camera only turns on after you click "Use camera" and your browser asks for permission; you can stop it or revoke permission at any time in your browser settings. We do not store your images, face coordinates, landmarks, or any biometric templates.</p>
+
+<h2>2. Third-party code loaded to run the detector</h2>
+<p>To run detection, your browser downloads:</p>
+<ul>
+<li>the MediaPipe Tasks Vision library and its WebAssembly files from the jsDelivr CDN (<code>cdn.jsdelivr.net</code>), and</li>
+<li>the face detection model file from Google (<code>storage.googleapis.com</code>).</li>
+</ul>
+<p>Like any web request, these providers receive standard request information such as your IP address and browser user agent. According to MediaPipe's own package notice, input data is processed on-device, but MediaPipe APIs may send performance and usage metrics to Google. These metrics are governed by Google's policies, not ours.</p>
+
+<h2>3. Optional anonymous analytics (off by default)</h2>
+<p>Analytics is <strong>opt-in</strong>. Nothing is sent unless you tick "Allow anonymous usage analytics" <em>and</em> the site owner has configured an analytics server. If enabled, each event contains only:</p>
+<ul>
+<li><strong>Event name</strong> — one of: detector_ready, detector_error, image_analyzed, camera_started, camera_stopped, camera_error, analytics_consent_granted, analytics_consent_denied;</li>
+<li><strong>Session ID</strong> — a random identifier stored in your browser's sessionStorage, which is cleared when you close the tab;</li>
+<li><strong>Page path</strong> (for example <code>/index.html</code>);</li>
+<li><strong>Properties</strong>, limited to: mode ("image" or "camera"), a coarse face-count bucket ("0", "1", "2-3" or "4+"), and an error category (for example "initialization");</li>
+<li><strong>Timestamp</strong>.</li>
+</ul>
+<p>Your analytics choice is saved in your browser's localStorage so we remember it. The server does not store IP addresses. It briefly holds connection addresses in memory only to rate-limit abuse; these are never written to the database. Untick the box at any time to stop analytics.</p>
+
+<h2>4. Advertising and cookies</h2>
+<p>This site may show ads from third-party vendors, including Google AdSense. Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this and other websites. Google's use of advertising cookies enables it and its partners to serve ads based on your visits to this site and/or other sites on the Internet. Learn more in <a href="https://policies.google.com/technologies/ads" rel="noopener">How Google uses information from sites that use its services</a>.</p>
+<p><strong>Opting out:</strong> you can turn off personalised advertising in Google's <a href="https://adssettings.google.com" rel="noopener">Ads Settings</a>, visit <a href="https://www.youronlinechoices.eu" rel="noopener">youronlinechoices.eu</a> (EU) to manage other vendors, or block or delete cookies in your browser.</p>
+<p><strong>EU, EEA, UK and Switzerland:</strong> where required by law, we will ask for your consent through a certified consent management platform before advertising cookies are used for personalised ads. You can change or withdraw consent at any time via the privacy/consent link shown on the page. If you decline, you may still see non-personalised ads.</p>
+<p>Ad vendors receive data under their own privacy policies. Ads are never placed over the camera view, and advertising scripts do not receive your images or camera video, which never leave your device.</p>
+
+<h2>5. Hosting</h2>
+<p>This site is hosted on GitHub Pages. GitHub may log visitor IP addresses for security purposes under its own privacy statement.</p>
+
+<h2>6. Children</h2>
+<p>FaceVision is not directed at children under 13 (or the minimum age in your country), and we do not knowingly collect personal information from them. If you believe a child has provided us information, contact us and we will delete it.</p>
+
+<h2>7. Your rights</h2>
+<p>Because we do not collect names, emails, images or IP addresses through the app, we usually cannot link analytics events to you. You can still contact us with any request about your data, and you may have rights under laws such as the GDPR or CCPA.</p>
+
+<h2>8. Changes</h2>
+<p>We will update this page and the "Last updated" date when our practices change.</p>
+
+<h2>9. Contact</h2>
+<p>[Your Name] — [contact email] — facevision.js.org</p>
+
+
+</main>
+<footer><nav class="foot-links" aria-label="Footer"><a href="index.html">Home</a> · <a href="articles/index.html">Articles</a> · <a href="about.html">About</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · <a href="contact.html">Contact</a></nav>
+<p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 [Your Name]</p></footer>
+</body></html>
