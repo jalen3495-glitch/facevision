@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>On-Device AI and Privacy: Why Local Processing Matters — FaceVision</title>
+<meta name="description" content="What it means when AI runs on your device, what it protects, and what it doesn't.">
+<link rel="stylesheet" href="../style.css">
+<!-- AdSense (disabled). After approval, replace ca-pub-XXXXXXXX and uncomment:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
+-->
+</head>
+<body>
+<header class="nav"><a class="brand" href="../index.html">Face<span>Vision</span></a>
+<nav class="links" aria-label="Site"><a href="../index.html">Home</a><a href="../articles/index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav></header>
+<main class="content">
+<article><p class="eyebrow">ARTICLE</p><h1>On-Device AI and Privacy: Why Local Processing Matters</h1>
+<p>"Processed on your device" has become a common promise in apps that use AI. It sounds reassuring, but what does it actually mean, and what does it protect? This article explains on-device AI in plain terms, its real privacy benefits, and the gaps you should still keep in mind.</p>
+<h2>Cloud AI vs. on-device AI</h2>
+<p>With <strong>cloud AI</strong>, your data travels to a company's server. The server runs a model, then sends back the answer. Your photo, voice clip or document has to leave your device for this to work, and someone else's computer holds it, at least briefly.</p>
+<p>With <strong>on-device AI</strong>, the model itself is downloaded to your phone, laptop or browser and runs there. Your data is the input to a program on your own machine. The answer is computed locally, and the input doesn't need to go anywhere.</p>
+<p>Not long ago, most useful models were too large and slow for consumer devices. Several trends changed that: smaller, more efficient model architectures; faster mobile chips and GPUs; and web technologies like WebAssembly and WebGL that let browsers run heavy computation. Tasks such as face detection, speech recognition and image classification can now run comfortably on everyday hardware.</p>
+<h2>The privacy benefits</h2>
+<h3>Less data in transit</h3>
+<p>If your image never leaves your device, it can't be intercepted on the way, logged by a proxy, or mis-sent. Removing the upload removes a whole category of risk.</p>
+<h3>Less data at rest</h3>
+<p>Data that is never collected can't leak in a breach, be subpoenaed, be sold, or be reused for something you didn't agree to. Data minimisation, collecting only what's needed, is a core principle of privacy laws such as the GDPR, and on-device processing is one of the strongest ways to achieve it.</p>
+<h3>You stay in control</h3>
+<p>When processing is local, closing the tab ends it. There's no retention policy to trust, because there's nothing retained elsewhere.</p>
+<h3>It often works better, too</h3>
+<p>Local processing avoids network delay, which matters for real-time video. It can keep working on a poor connection once the model is loaded. And it reduces server costs for the developer, which can make free tools sustainable.</p>
+<h2>What "on-device" does not guarantee</h2>
+<p>Local processing is a strong protection, but it is not a complete privacy guarantee. It's worth understanding the edges.</p>
+<h3>The code and model still come from somewhere</h3>
+<p>A browser app downloads its code and model files from servers or content delivery networks. Those servers see a normal web request, including your IP address and browser details. FaceVision, for example, loads MediaPipe from the jsDelivr CDN and its model from Google's storage. Your images aren't part of those requests, but the request itself is visible to those providers.</p>
+<h3>Telemetry and analytics</h3>
+<p>An app can process your photo locally and still send other information: usage events, error reports or performance metrics. MediaPipe's own notice says its APIs may send performance and usage metrics to Google, separate from your input data. Good apps tell you what telemetry exists and let you turn optional parts off. FaceVision's own analytics are off by default and, if switched on, send only coarse event data such as "image analysed, 2-3 faces", never images or face coordinates.</p>
+<h3>Results can still be shared</h3>
+<p>On-device processing protects the input. If an app then uploads the <em>results</em>, such as detailed face measurements, privacy depends on what those results reveal. Always check what leaves the device, not just where the computation happens.</p>
+<h3>Ads and other scripts</h3>
+<p>Web pages may include third-party scripts for advertising or analytics. These can set cookies and collect browsing data under their own policies. A well-built page keeps them separate from sensitive features; for instance, ad scripts on FaceVision do not get access to your camera stream or chosen image, which stay inside the app's code and never leave the device. Still, it's sensible to review a site's privacy policy and use your browser's privacy controls.</p>
+<h2>How to check an app's claims</h2>
+<ul>
+<li><strong>Read the privacy policy</strong> and look for specific statements, not vague ones.</li>
+<li><strong>Open your browser's developer tools</strong> (Network tab) while using the app. You can see every request it makes. Uploading a 3&nbsp;MB photo would show up as a large outgoing request.</li>
+<li><strong>Try it offline.</strong> If a tool keeps working after the model has loaded and you disconnect, its core processing is local.</li>
+<li><strong>Check camera indicators.</strong> Browsers show when a site is using your camera. You can revoke access in site settings at any time.</li>
+</ul>
+<h2>The bottom line</h2>
+<p>On-device AI is one of the best things to happen to everyday privacy: it lets you use powerful tools without handing over your data. It isn't magic, though. The fair way to judge an app is to ask three questions: where does processing happen, what else is sent, and who receives it? FaceVision's answers are spelled out in our <a href="../privacy.html">privacy policy</a>.</p>
+<p class="back"><a href="index.html">← All articles</a> · <a href="../index.html">Try FaceVision</a></p></article>
+<!-- AdSense unit (article bottom) (disabled). Replace ca-pub-XXXXXXXX / data-ad-slot and uncomment:
+<div class="ad-slot">
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+-->
+</main>
+<footer><nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> · <a href="../articles/index.html">Articles</a> · <a href="../about.html">About</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a></nav>
+<p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 [Your Name]</p></footer>
+</body></html>

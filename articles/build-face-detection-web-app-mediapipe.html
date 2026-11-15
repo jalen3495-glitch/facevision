@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Build a Face Detection Web App with MediaPipe: A Beginner Tutorial — FaceVision</title>
+<meta name="description" content="Step-by-step: detect faces in images and webcam video in the browser with MediaPipe Tasks Vision.">
+<link rel="stylesheet" href="../style.css">
+<!-- AdSense (disabled). After approval, replace ca-pub-XXXXXXXX and uncomment:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
+-->
+</head>
+<body>
+<header class="nav"><a class="brand" href="../index.html">Face<span>Vision</span></a>
+<nav class="links" aria-label="Site"><a href="../index.html">Home</a><a href="../articles/index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav></header>
+<main class="content">
+<article><p class="eyebrow">ARTICLE</p><h1>Build a Face Detection Web App with MediaPipe: A Beginner Tutorial</h1>
+<p>In this tutorial you'll build a small web page that detects faces in a photo and in your webcam feed, entirely in the browser. It follows the same approach FaceVision uses: MediaPipe Tasks Vision loaded as a JavaScript module, the BlazeFace short-range model, and a canvas overlay for the results. You only need a text editor, a modern browser and basic HTML and JavaScript knowledge.</p>
+<h2>Step 1: Set up the files</h2>
+<p>Create a folder with two files, <code>index.html</code> and <code>app.js</code>. Because the code uses ES modules and the camera, you must serve it over HTTP rather than opening the file directly. From the folder, run a simple local server such as:</p>
+<pre><code>python3 -m http.server 8000</code></pre>
+<p>Then open <code>http://localhost:8000</code>. Browsers treat <code>localhost</code> as a secure context, so camera access works. When you publish the site, use HTTPS (GitHub Pages provides it).</p>
+<h2>Step 2: The HTML</h2>
+<pre><code>&lt;input id="file" type="file" accept="image/*"&gt;
+&lt;button id="cam"&gt;Use camera&lt;/button&gt;
+&lt;div id="stage" style="position:relative;display:inline-block"&gt;
+  &lt;img id="img" style="max-width:100%"&gt;
+  &lt;video id="video" autoplay playsinline muted style="max-width:100%"&gt;&lt;/video&gt;
+  &lt;canvas id="overlay" style="position:absolute;inset:0;pointer-events:none"&gt;&lt;/canvas&gt;
+&lt;/div&gt;
+&lt;script type="module" src="app.js"&gt;&lt;/script&gt;</code></pre>
+<p>The canvas sits on top of the image or video and is where we'll draw boxes. <code>pointer-events:none</code> lets clicks pass through to elements below.</p>
+<h2>Step 3: Load MediaPipe and create a detector</h2>
+<pre><code>import { FaceDetector, FilesetResolver } from
+  "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.0.1";
+
+const WASM = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.0.1/wasm";
+const MODEL = "https://storage.googleapis.com/mediapipe-models/face_detector/" +
+  "blaze_face_short_range/float16/1/blaze_face_short_range.tflite";
+
+async function createDetector(delegate) {
+  const vision = await FilesetResolver.forVisionTasks(WASM);
+  return FaceDetector.createFromOptions(vision, {
+    baseOptions: { modelAssetPath: MODEL, delegate },
+    runningMode: "IMAGE",
+    minDetectionConfidence: 0.5
+  });
+}
+
+let detector;
+try { detector = await createDetector("GPU"); }
+catch { detector = await createDetector("CPU"); }</code></pre>
+<p>Key points: pin the library version (here 1.0.1, the version FaceVision uses) so an update can't break your app unexpectedly, and keep the Wasm URL on the same version. Try the GPU delegate first and fall back to CPU if it fails, since not every device supports GPU inference.</p>
+<h2>Step 4: Draw the results</h2>
+<p>The detector returns coordinates in the media's <em>intrinsic</em> pixel size, but the element may be displayed at a different size. We convert between the two:</p>
+<pre><code>const overlay = document.getElementById("overlay");
+const ctx = overlay.getContext("2d");
+
+function draw(result, el, w, h) {
+  const r = el.getBoundingClientRect();
+  overlay.width = r.width; overlay.height = r.height;
+  const sx = r.width / w, sy = r.height / h;
+  ctx.clearRect(0, 0, overlay.width, overlay.height);
+  ctx.strokeStyle = "#6ea8fe"; ctx.lineWidth = 3;
+  for (const d of result.detections) {
+    const b = d.boundingBox;
+    ctx.strokeRect(b.originX * sx, b.originY * sy, b.width * sx, b.height * sy);
+    for (const k of d.keypoints) {   // keypoints are normalised 0..1
+      ctx.fillRect(k.x * r.width - 2, k.y * r.height - 2, 4, 4);
+    }
+  }
+}</code></pre>
+<p>Note that bounding boxes are in pixels while keypoints are normalised to the range 0 to 1, so they're scaled differently. Mixing these up is the most common bug in beginner projects.</p>
+<h2>Step 5: Detect faces in an image</h2>
+<pre><code>const img = document.getElementById("img");
+let objectUrl;
+document.getElementById("file").addEventListener("change", e =&gt; {
+  const f = e.target.files[0]; if (!f) return;
+  if (objectUrl) URL.revokeObjectURL(objectUrl);
+  objectUrl = URL.createObjectURL(f);
+  img.onload = async () =&gt; {
+    await detector.setOptions({ runningMode: "IMAGE" });
+    const result = detector.detect(img);
+    draw(result, img, img.naturalWidth, img.naturalHeight);
+  };
+  img.src = objectUrl;
+});</code></pre>
+<p><code>URL.createObjectURL</code> lets the browser display the chosen file without uploading it anywhere. Revoking the old URL frees memory when the user picks another image.</p>
+<h2>Step 6: Detect faces in webcam video</h2>
+<pre><code>const video = document.getElementById("video");
+document.getElementById("cam").addEventListener("click", async () =&gt; {
+  const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+  video.srcObject = stream;
+  await detector.setOptions({ runningMode: "VIDEO" });
+  const loop = () =&gt; {
+    if (video.readyState &gt;= 2) {
+      const result = detector.detectForVideo(video, performance.now());
+      draw(result, video, video.videoWidth, video.videoHeight);
+    }
+    requestAnimationFrame(loop);
+  };
+  loop();
+});</code></pre>
+<p><code>getUserMedia</code> prompts the user for permission (see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia" rel="noopener">MDN's reference</a>). In VIDEO mode you must pass an increasing timestamp with each frame; <code>performance.now()</code> works well. In a real app, also stop the camera tracks with <code>stream.getTracks().forEach(t =&gt; t.stop())</code> when the user is done, so the camera light turns off.</p>
+<h2>Step 7: Make it robust</h2>
+<ul>
+<li><strong>Show status.</strong> Loading the model takes a moment; display "Loading…" and disable buttons until ready.</li>
+<li><strong>Handle errors.</strong> Wrap camera access in try/catch; users may deny permission or have no camera.</li>
+<li><strong>Clean up.</strong> Stop camera tracks and revoke object URLs.</li>
+<li><strong>Redraw on resize.</strong> The displayed size changes with the window, so recompute the overlay.</li>
+</ul>
+<h2>Step 8: Publish to GitHub Pages</h2>
+<p>Push your folder to a GitHub repository, then enable Pages in the repository settings and choose your branch. Adding an empty <code>.nojekyll</code> file tells Pages to serve files exactly as they are. Your app gets an HTTPS address, so camera access works for visitors.</p>
+<h2>Keep it private</h2>
+<p>Everything above runs in the visitor's browser: images and video frames never leave the device. If you add analytics, make it opt-in and send only coarse events, as FaceVision does. Respect the line between detection and recognition; see <a href="face-detection-vs-face-recognition.html">our explainer</a>.</p>
+<h2>Next steps</h2>
+<p>Read Google's <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector/web_js" rel="noopener">Face Detector guide for web</a> for all options, or try the finished version: <a href="../index.html">FaceVision</a>.</p>
+<p class="back"><a href="index.html">← All articles</a> · <a href="../index.html">Try FaceVision</a></p></article>
+<!-- AdSense unit (article bottom) (disabled). Replace ca-pub-XXXXXXXX / data-ad-slot and uncomment:
+<div class="ad-slot">
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+-->
+</main>
+<footer><nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> · <a href="../articles/index.html">Articles</a> · <a href="../about.html">About</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a></nav>
+<p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 [Your Name]</p></footer>
+</body></html>

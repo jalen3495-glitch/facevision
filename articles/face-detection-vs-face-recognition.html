@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Face Detection vs. Face Recognition: What's the Difference? — FaceVision</title>
+<meta name="description" content="Detection finds faces; recognition identifies people. Why the difference matters for privacy and law.">
+<link rel="stylesheet" href="../style.css">
+<!-- AdSense (disabled). After approval, replace ca-pub-XXXXXXXX and uncomment:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
+-->
+</head>
+<body>
+<header class="nav"><a class="brand" href="../index.html">Face<span>Vision</span></a>
+<nav class="links" aria-label="Site"><a href="../index.html">Home</a><a href="../articles/index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav></header>
+<main class="content">
+<article><p class="eyebrow">ARTICLE</p><h1>Face Detection vs. Face Recognition: What's the Difference?</h1>
+<p>"Face detection" and "face recognition" are often used as if they mean the same thing. They don't. The difference is technical, but it also matters a great deal for privacy, ethics and the law. If you have ever wondered whether a photo app "knows who you are", this distinction is the place to start.</p>
+<h2>Face detection: is there a face, and where?</h2>
+<p>Face detection answers a narrow question: <em>does this image contain a face, and if so, where is it?</em> A detector looks at pixels and outputs a list of regions, usually rectangles called bounding boxes, each with a confidence score. Many detectors also return a handful of keypoints, such as the centres of the eyes, the tip of the nose and the corners of the mouth.</p>
+<p>That is the whole job. A detector has no idea whose face it found. Two different people standing in the same spot produce essentially the same kind of output: a box, a score, a few points. Nothing in that result is designed to tell them apart.</p>
+<p>Detection is everywhere. Your phone camera uses it to focus and set exposure on faces. Video-call apps use it to blur or replace backgrounds and to keep you centred. Photo editors use it to apply effects. Accessibility tools use it to tell a blind user "one face, centred in frame". FaceVision is a detector: it draws boxes and keypoints and stops there.</p>
+<h2>Face recognition: whose face is it?</h2>
+<p>Face recognition goes much further. It takes a detected face and tries to answer <em>who is this?</em> or <em>is this the same person as that one?</em> A typical recognition pipeline has several stages:</p>
+<ol>
+<li><strong>Detect</strong> the face (the step above).</li>
+<li><strong>Align</strong> it, rotating and scaling so the eyes and mouth sit in standard positions.</li>
+<li><strong>Encode</strong> it into an "embedding": a list of numbers produced by a neural network trained so that photos of the same person end up close together and different people end up far apart.</li>
+<li><strong>Compare</strong> that embedding to others, either one-to-one (verification, like unlocking a phone) or one-to-many (identification, like searching a database of known faces).</li>
+</ol>
+<p>The embedding is the crucial part. It is a biometric template: a durable numeric signature of someone's face that can be stored, searched and matched later, often without the person knowing.</p>
+<h2>Why the difference matters</h2>
+<h3>Privacy risk</h3>
+<p>Detection output is low-risk on its own. Knowing that "there is a face at position x, y" reveals little about anyone. Recognition creates information that can follow a person across photos, places and time. That's why public debate about "facial recognition" focuses on identification: tracking people in crowds, building searchable face databases, or matching photos scraped from the web.</p>
+<h3>Legal treatment</h3>
+<p>Many privacy laws treat biometric data used to identify a person as a special, more sensitive category. The EU's GDPR, for example, lists biometric data processed "for the purpose of uniquely identifying a natural person" among its special categories, and some US states, such as Illinois with its Biometric Information Privacy Act, regulate the collection of face geometry. The exact rules vary by place and change over time, so anyone building products should get proper legal advice. The general pattern is clear, though: identifying people raises the bar much more than locating faces does.</p>
+<h3>Accuracy and harm</h3>
+<p>Both technologies make mistakes, but the consequences differ. A detector that misses a face in a dim photo is an annoyance. A recognition system that matches the wrong person can lead to someone being wrongly accused, denied access or flagged. Errors in recognition also tend to fall unevenly across groups of people when training data is unbalanced, which is one reason recognition systems attract scrutiny.</p>
+<h2>Grey areas</h2>
+<p>Some features sit between the two. Face <em>tracking</em> follows the same face from one video frame to the next, but it only knows "this is probably the same box as a moment ago", not who the person is. Face <em>landmarking</em> or mesh estimation finds hundreds of points for effects like virtual makeup. Attribute estimation guesses things like head pose or whether eyes are open. None of these is identification by itself, but any system that stores detailed face geometry deserves careful thought, because that data could be repurposed.</p>
+<h2>How to tell what an app is doing</h2>
+<p>If you're unsure whether a tool only detects faces, ask a few questions:</p>
+<ul>
+<li>Does it ever ask you to name or tag people? Tagging usually means recognition.</li>
+<li>Does it group photos by person? That requires comparing faces, which is recognition.</li>
+<li>Are images uploaded to a server? Upload is not proof of recognition, but it means someone else holds your pictures.</li>
+<li>What does the privacy policy say about "biometric", "face templates" or "faceprints"?</li>
+</ul>
+<h2>Where FaceVision fits</h2>
+<p>FaceVision runs a detection model in your browser. It finds faces, draws boxes and a few keypoints, shows a confidence score, and does nothing else with them. It creates no embeddings, keeps no database of faces, and does not upload your images. You can read exactly what it does and doesn't collect in the <a href="../privacy.html">privacy policy</a>.</p>
+<h2>The short version</h2>
+<p>Detection asks <em>where</em>. Recognition asks <em>who</em>. Detection is a building block found in everyday camera features; recognition is a powerful identification tool that comes with real privacy and legal responsibilities. When you hear about "face AI", it is worth asking which of the two is actually happening.</p>
+<p class="back"><a href="index.html">← All articles</a> · <a href="../index.html">Try FaceVision</a></p></article>
+<!-- AdSense unit (article bottom) (disabled). Replace ca-pub-XXXXXXXX / data-ad-slot and uncomment:
+<div class="ad-slot">
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+-->
+</main>
+<footer><nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> · <a href="../articles/index.html">Articles</a> · <a href="../about.html">About</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a></nav>
+<p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 [Your Name]</p></footer>
+</body></html>
