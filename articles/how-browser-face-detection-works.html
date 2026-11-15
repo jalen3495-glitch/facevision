@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How Browser Face Detection Works: MediaPipe and BlazeFace — FaceVision</title>
+<meta name="description" content="A look under the hood at how a neural network finds faces in real time inside a web page.">
+<link rel="stylesheet" href="../style.css">
+<!-- AdSense (disabled). After approval, replace ca-pub-XXXXXXXX and uncomment:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
+-->
+</head>
+<body>
+<header class="nav"><a class="brand" href="../index.html">Face<span>Vision</span></a>
+<nav class="links" aria-label="Site"><a href="../index.html">Home</a><a href="../articles/index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav></header>
+<main class="content">
+<article><p class="eyebrow">ARTICLE</p><h1>How Browser Face Detection Works: MediaPipe and BlazeFace</h1>
+<p>A few years ago, running a neural network on live video meant a powerful computer or a cloud server. Today a web page can find faces in your webcam feed many times per second, without installing anything and without sending a single frame off your device. Here is how that works, using the stack FaceVision is built on: Google's MediaPipe and the BlazeFace model.</p>
+<h2>The pieces</h2>
+<p>Browser face detection relies on three ingredients:</p>
+<ol>
+<li><strong>A trained model</strong>: a small neural network, stored as a file, that has learned what faces look like.</li>
+<li><strong>A runtime</strong>: code that can execute that model efficiently in a browser.</li>
+<li><strong>Glue code</strong>: JavaScript that feeds images to the runtime and draws the results.</li>
+</ol>
+<p>MediaPipe Tasks provides the runtime and a ready-made "Face Detector" task. BlazeFace is the model behind it.</p>
+<h2>BlazeFace: built for speed</h2>
+<p>BlazeFace was introduced by Google researchers in the 2019 paper <a href="https://arxiv.org/abs/1907.05047" rel="noopener">"BlazeFace: Sub-millisecond Neural Face Detection on Mobile GPUs"</a>. The goal was a detector fast enough for real-time use on phones, as a first step for other face features.</p>
+<p>A few design ideas make it fast:</p>
+<ul>
+<li><strong>Small input.</strong> The short-range version works on a small, downscaled image. Faces close to the camera, such as in a selfie or webcam, are still large enough at that size to detect.</li>
+<li><strong>Lightweight layers.</strong> The network is built from depthwise separable convolutions, which split one expensive operation into two cheap ones. This greatly reduces the arithmetic needed per image.</li>
+<li><strong>Anchors.</strong> Like other single-shot detectors, BlazeFace predicts results relative to a fixed grid of "anchor" boxes spread across the image. For each anchor, it outputs a score (how likely a face is there) and adjustments to turn the anchor into a tight box.</li>
+<li><strong>Keypoints.</strong> Alongside each box it predicts six facial keypoints: two eyes, two ear regions (tragions), the nose tip and the mouth centre.</li>
+</ul>
+<p>Because neighbouring anchors often detect the same face, many overlapping boxes come out. A post-processing step merges or removes duplicates (a form of non-maximum suppression), leaving one box per face.</p>
+<h2>MediaPipe Tasks in the browser</h2>
+<p>MediaPipe's web library, <code>@mediapipe/tasks-vision</code>, ships its inference engine as WebAssembly (Wasm), a compact binary format browsers run at near-native speed. When a GPU is available, it can use WebGL to run the model's maths on the graphics card. If the GPU path fails, it can fall back to the CPU. FaceVision tries the GPU first and falls back to CPU automatically.</p>
+<p>In practice, starting the detector looks like this:</p>
+<ol>
+<li>Load the Wasm files with <code>FilesetResolver.forVisionTasks()</code>.</li>
+<li>Create a detector with <code>FaceDetector.createFromOptions()</code>, pointing to the model file and choosing a running mode: <code>IMAGE</code> for single photos or <code>VIDEO</code> for a stream.</li>
+<li>Call <code>detect(image)</code> or <code>detectForVideo(video, timestamp)</code>.</li>
+</ol>
+<p>Each call returns a list of detections, each with a bounding box, a confidence score and keypoints. Google's <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector" rel="noopener">Face Detector documentation</a> describes the options and output in detail.</p>
+<h2>From pixels to boxes</h2>
+<p>When you pass an image to the detector, roughly the following happens:</p>
+<ol>
+<li><strong>Pre-processing.</strong> The image is resized to the model's input size and pixel values are normalised.</li>
+<li><strong>Inference.</strong> The network runs once over the whole image and outputs scores and box offsets for every anchor.</li>
+<li><strong>Decoding.</strong> Offsets are converted into actual box coordinates.</li>
+<li><strong>Filtering.</strong> Boxes below the minimum confidence are dropped. FaceVision uses a threshold of 0.5.</li>
+<li><strong>Suppression.</strong> Overlapping boxes for the same face are merged.</li>
+<li><strong>Mapping back.</strong> Coordinates are converted to the original image size.</li>
+</ol>
+<p>That last step catches out many beginners. The image you see on screen is often scaled differently from the image's real pixel size. To draw boxes in the right place, you need to convert from the image's intrinsic dimensions to its displayed dimensions. FaceVision does this explicitly, which is why its boxes line up even when the preview is resized.</p>
+<h2>Video: doing it many times a second</h2>
+<p>For live camera input, the app uses <code>getUserMedia</code> to get a video stream, then calls <code>detectForVideo</code> on each animation frame with a timestamp. The timestamp lets MediaPipe know frames are sequential. Because the model is small, this can keep up with the camera on many laptops and phones, though actual speed depends on your hardware and browser.</p>
+<h2>Limits to know about</h2>
+<ul>
+<li>The short-range model is tuned for faces fairly close to the camera. Small, distant faces in a group photo may be missed.</li>
+<li>Strong side profiles, heavy occlusion (masks, hands) and very poor lighting reduce accuracy.</li>
+<li>Confidence scores are not probabilities you can treat as exact; they are useful for ranking and thresholding.</li>
+</ul>
+<h2>Why it runs locally</h2>
+<p>The model file and library are downloaded once, then everything happens on your machine. Your photos never need to travel anywhere to be analysed. That combination of speed and privacy is what makes in-browser detection so appealing. Read more in our article on <a href="on-device-ai-and-privacy.html">on-device AI and privacy</a>.</p>
+<p class="back"><a href="index.html">← All articles</a> · <a href="../index.html">Try FaceVision</a></p></article>
+<!-- AdSense unit (article bottom) (disabled). Replace ca-pub-XXXXXXXX / data-ad-slot and uncomment:
+<div class="ad-slot">
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+-->
+</main>
+<footer><nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> · <a href="../articles/index.html">Articles</a> · <a href="../about.html">About</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a></nav>
+<p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 [Your Name]</p></footer>
+</body></html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tips for Better Face Detection Results: Lighting, Angles and More — FaceVision</title>
+<meta name="description" content="Practical ways to help a face detector find faces reliably in photos and live video.">
+<link rel="stylesheet" href="../style.css">
+<!-- AdSense (disabled). After approval, replace ca-pub-XXXXXXXX and uncomment:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
+-->
+</head>
+<body>
+<header class="nav"><a class="brand" href="../index.html">Face<span>Vision</span></a>
+<nav class="links" aria-label="Site"><a href="../index.html">Home</a><a href="../articles/index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav></header>
+<main class="content">
+<article><p class="eyebrow">ARTICLE</p><h1>Tips for Better Face Detection Results: Lighting, Angles and More</h1>
+<p>Modern face detectors are impressively robust, but they are not magic. They learned from example images, and they do best when your photo or video looks a bit like those examples. If FaceVision, or any detector, is missing faces or giving low confidence scores, these practical tips will usually help.</p>
+<h2>1. Get the lighting right</h2>
+<p>Lighting has the biggest effect on detection quality.</p>
+<ul>
+<li><strong>Light the face from the front.</strong> A window or lamp in front of you, slightly above eye level, gives even lighting that shows the eyes, nose and mouth clearly.</li>
+<li><strong>Avoid strong backlight.</strong> Sitting with a bright window behind you turns your face into a dark silhouette. Cameras expose for the bright background, and the detector loses facial detail.</li>
+<li><strong>Soften harsh shadows.</strong> Direct overhead light or a single strong side light can hide half the face. Diffuse light, such as from a cloudy sky or a lamp bounced off a wall, works better.</li>
+<li><strong>Don't go too dark.</strong> In low light, cameras add noise and blur, and both reduce accuracy. Turn on a light rather than relying on the camera's night processing.</li>
+</ul>
+<h2>2. Mind the angle</h2>
+<p>Detectors find faces most reliably when they face the camera.</p>
+<ul>
+<li><strong>Frontal and near-frontal faces</strong> work best. Turning your head moderately is usually fine.</li>
+<li><strong>Full side profiles</strong>, where only one eye is visible, are much harder and may not be detected.</li>
+<li><strong>Extreme tilt</strong>, such as looking straight up or down or lying sideways, can also reduce detection. Rotating the photo upright before analysing it often helps.</li>
+<li><strong>Camera at eye level</strong> gives the most natural, detectable view for webcams.</li>
+</ul>
+<h2>3. Distance and face size</h2>
+<p>FaceVision uses the BlazeFace <em>short-range</em> model, designed for faces relatively close to the camera, like selfies, video calls and portraits.</p>
+<ul>
+<li>If a face takes up only a tiny part of the frame, for example people in the back of a large group photo, it may be missed.</li>
+<li>Cropping the image so faces are larger, or moving closer to the camera, often fixes this.</li>
+<li>Very close faces that are cut off by the frame edges can also cause trouble; keep the whole face in view.</li>
+</ul>
+<h2>4. Reduce obstructions</h2>
+<p>Detectors rely on recognisable facial structure. Anything covering the key features makes their job harder.</p>
+<ul>
+<li>Face masks, scarves and hands over the face reduce confidence.</li>
+<li>Large sunglasses hide the eyes, which are important cues.</li>
+<li>Hair covering much of the face, hats with low brims and heavy shadows from them can also interfere.</li>
+</ul>
+<p>Partial occlusion doesn't always prevent detection, but if you're getting inconsistent results, it's a likely cause.</p>
+<h2>5. Image quality matters</h2>
+<ul>
+<li><strong>Focus:</strong> blurry faces, whether from motion or a missed focus, lose the edges the model uses.</li>
+<li><strong>Resolution:</strong> very small or heavily compressed images may have too little detail. A reasonably sized, clear photo is best. Very large images are fine, since they are downscaled for the model anyway.</li>
+<li><strong>Clean lens:</strong> a smudged phone or laptop camera produces a hazy image. Wipe it.</li>
+<li><strong>Filters:</strong> heavy stylised filters, extreme colour grading or cartoon effects can confuse the detector.</li>
+</ul>
+<h2>6. Tips for live camera mode</h2>
+<ul>
+<li>Allow camera permission when your browser asks; if you denied it before, re-enable it in the site settings (usually the icon next to the address bar).</li>
+<li>Close other apps using the camera, such as video-call software, if the camera won't start.</li>
+<li>Hold still for a moment when checking results. Fast movement causes motion blur.</li>
+<li>If detection feels slow, close other heavy tabs. The detector uses your GPU when available and falls back to the CPU otherwise, so performance depends on your device.</li>
+<li>Use a recent version of Chrome, Edge, Firefox or Safari for the best support of WebAssembly and WebGL.</li>
+</ul>
+<h2>7. Understanding confidence scores</h2>
+<p>Each detection comes with a confidence score between 0 and 1. FaceVision shows detections above 0.5. A high score means the model is quite sure it found a face; a score near the threshold means it's uncertain. If faces appear and disappear in live video, they're probably hovering around the threshold. Improving lighting and angle usually raises scores and stabilises results.</p>
+<h2>8. False positives</h2>
+<p>Occasionally a detector reports a face where there isn't one: a pattern in wallpaper, a face on a poster or a pet. Printed faces, screens and paintings genuinely contain face-like structure, so detecting them is expected behaviour. Detection only knows "this looks like a face", not whether it's a real, live person.</p>
+<h2>Quick checklist</h2>
+<ol>
+<li>Soft light in front of the face, no bright window behind.</li>
+<li>Face toward the camera, upright, fully in frame.</li>
+<li>Face reasonably large in the image.</li>
+<li>Nothing covering the eyes, nose or mouth.</li>
+<li>Sharp, clean, unfiltered image.</li>
+</ol>
+<p>Ready to try? <a href="../index.html">Open FaceVision</a>. Your images stay on your device.</p>
+<p class="back"><a href="index.html">← All articles</a> · <a href="../index.html">Try FaceVision</a></p></article>
+<!-- AdSense unit (article bottom) (disabled). Replace ca-pub-XXXXXXXX / data-ad-slot and uncomment:
+<div class="ad-slot">
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+-->
+</main>
+<footer><nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> · <a href="../articles/index.html">Articles</a> · <a href="../about.html">About</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a></nav>
+<p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 [Your Name]</p></footer>
+</body></html>
