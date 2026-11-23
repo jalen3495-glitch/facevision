@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Camera Permissions, Explained: What FaceVision Can and Cannot See — FaceVision</title>
+<meta name="description" content="What the browser camera prompt means, what FaceVision can see after you allow it, and how to turn access off.">
+<link rel="canonical" href="https://jalen3495-glitch.github.io/facevision/articles/camera-permissions-explained.html">
+<meta name="theme-color" content="#080a10">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="FaceVision">
+<meta property="og:title" content="Camera Permissions, Explained: What FaceVision Can and Cannot See — FaceVision">
+<meta property="og:description" content="What the browser camera prompt means, what FaceVision can see after you allow it, and how to turn access off.">
+<meta property="og:url" content="https://jalen3495-glitch.github.io/facevision/articles/camera-permissions-explained.html">
+<meta property="og:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="og:image:alt" content="FaceVision — detect faces in your browser. Your photo stays on your device.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Camera Permissions, Explained: What FaceVision Can and Cannot See — FaceVision">
+<meta name="twitter:description" content="What the browser camera prompt means, what FaceVision can see after you allow it, and how to turn access off.">
+<meta name="twitter:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="article:published_time" content="2026-11-23">
+<meta property="article:author" content="Kiana Cupit">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Camera Permissions, Explained: What FaceVision Can and Cannot See",
+  "description": "What the browser camera prompt means, what FaceVision can see after you allow it, and how to turn access off.",
+  "datePublished": "2026-11-23",
+  "dateModified": "2026-11-23",
+  "author": {
+    "@type": "Person",
+    "name": "Kiana Cupit"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "FaceVision",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jalen3495-glitch.github.io/facevision/img/icon-192.png"
+    }
+  },
+  "mainEntityOfPage": "https://jalen3495-glitch.github.io/facevision/articles/camera-permissions-explained.html",
+  "image": "https://jalen3495-glitch.github.io/facevision/img/og-image.png"
+}
+</script>
+<script src="../js/ads-config.js" defer></script>
+<script src="../js/ads.js" defer></script>
+<script src="../js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Face<span>Vision</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <nav class="links" id="site-nav" aria-label="Site"><a href="../index.html">Home</a><a href="index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="content">
+<aside class="ad-slot" data-ad-slot="top" hidden></aside>
+<article>
+<p class="eyebrow">Article</p>
+<h1>Camera Permissions, Explained: What FaceVision Can and Cannot See</h1>
+<p class="meta">Published November 23, 2026</p>
+<p>When a website asks to use your camera, it can feel like you are handing over more than a live picture. This guide explains what that prompt actually means, what FaceVision does after you agree, and how to take the permission back.</p>
+
+<h2>The browser is in charge, not just the site</h2>
+<p>On the web, a page cannot quietly turn on your camera. It has to call a browser API named <code>getUserMedia</code>. The browser then shows its own permission dialog. FaceVision can only see a video stream if you accept that dialog, and only while this tab keeps the stream open.</p>
+<p>That is why the prompt looks like it belongs to Chrome, Safari, Firefox or Edge, not like a form we designed. We also show an in-page explanation first, so you can cancel before the browser dialog appears.</p>
+
+<h2>What FaceVision uses the camera for</h2>
+<p>If you allow access, the live video is drawn in the preview on this page. A face detector runs in the same tab and draws boxes and a few keypoints on top of the frames. The tool is answering "where is a face?", not "who is this person?".</p>
+<p>The stream never needs to leave your device for that to work. FaceVision does not upload camera frames to its own servers. When you click "Stop camera", or you leave the page, the tracks are stopped so the camera light should turn off.</p>
+
+<h2>What permission does not grant</h2>
+<p>Camera permission is not a blank cheque. In particular, allowing the camera does <strong>not</strong> by itself let FaceVision:</p>
+<ul>
+<li>turn the camera on later without asking, in a new visit, unless your browser remembered the choice for this site — and even then the page still has to request the stream;</li>
+<li>listen through the microphone (we request video only, with audio turned off);</li>
+<li>look at other files on your device;</li>
+<li>keep recording after you stop the camera or close the tab.</li>
+</ul>
+<p>A screenshot, another app that also has camera access, or a browser extension can still capture what is on your screen. Permission to this site does not prevent that, and it is not something we can fully control.</p>
+
+<h2>Why some browsers refuse</h2>
+<p>Modern browsers only allow camera access on a secure page (HTTPS) or on localhost. If you opened a copied file from disk, or a plain HTTP address, the request will fail. FaceVision will tell you that, rather than showing a generic error.</p>
+<p>Other common failures have specific causes:</p>
+<ul>
+<li><strong>Permission blocked</strong> — you clicked Block, or a previous visit did. Use the site settings in the address bar, allow the camera, then try again.</li>
+<li><strong>No camera found</strong> — the device has no usable camera, or the operating system is hiding it.</li>
+<li><strong>Camera is busy</strong> — another tab or app already has the camera open.</li>
+</ul>
+<p>You can always detect faces in a photo instead, without granting camera access at all.</p>
+
+<h2>How to turn access off</h2>
+<p>Stopping the camera in FaceVision ends the current stream. To stop the browser from offering access so easily next time, open the site settings for this address and set the camera to "Ask" or "Block". The exact labels differ by browser, but they all live near the padlock or site-information icon in the address bar.</p>
+<p>On a phone, also check the system settings for that browser. If the browser itself is denied the camera, no website can use it.</p>
+
+<h2>A rule of thumb</h2>
+<p>Treat camera permission like you would a physical lens cap: leave it on until you have a reason to open it, and close it when you are done. FaceVision is built so that "done" is a single click, and so that refusing the camera still leaves you a useful photo tool. For more on what happens to a photo you do choose, read <a href="what-happens-to-your-photo.html">What happens to your photo after you close the tab</a>.</p>
+<p class="back"><a href="index.html">← All articles</a> · <a href="../index.html">Try FaceVision</a></p>
+</article>
+<aside class="ad-slot" data-ad-slot="mid" hidden></aside>
+<aside class="ad-slot" data-ad-slot="bottom" hidden></aside>
+</main>
+<footer>
+  <nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> <a href="index.html">Articles</a> <a href="../about.html">About</a> <a href="../privacy.html">Privacy</a> <a href="../terms.html">Terms</a> <a href="../contact.html">Contact</a></nav>
+  <p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 Kiana Cupit</p>
+</footer>
+</body></html>
