@@ -1,26 +1,66 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Articles — FaceVision</title>
-<meta name="description" content="Guides on browser face detection, on-device AI and privacy.">
+<meta name="description" content="Guides on browser face detection, on-device AI, camera permissions and privacy.">
+<link rel="canonical" href="https://jalen3495-glitch.github.io/facevision/articles/index.html">
+<meta name="theme-color" content="#080a10">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="FaceVision">
+<meta property="og:title" content="Articles — FaceVision">
+<meta property="og:description" content="Guides on browser face detection, on-device AI, camera permissions and privacy.">
+<meta property="og:url" content="https://jalen3495-glitch.github.io/facevision/articles/index.html">
+<meta property="og:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="og:image:alt" content="FaceVision — detect faces in your browser. Your photo stays on your device.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Articles — FaceVision">
+<meta name="twitter:description" content="Guides on browser face detection, on-device AI, camera permissions and privacy.">
+<meta name="twitter:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
 <link rel="stylesheet" href="../style.css">
-<!-- AdSense (disabled). After approval, replace ca-pub-XXXXXXXX and uncomment:
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
--->
+<script src="../js/ads-config.js" defer></script>
+<script src="../js/ads.js" defer></script>
+<script src="../js/site.js" defer></script>
 </head>
 <body>
-<header class="nav"><a class="brand" href="../index.html">Face<span>Vision</span></a>
-<nav class="links" aria-label="Site"><a href="../index.html">Home</a><a href="../articles/index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav></header>
-<main class="content">
-<p class="eyebrow">ARTICLES</p><h1>Guides &amp; explainers</h1><p class="sub">Plain-language articles about face detection, how it runs in your browser, and how to get good results.</p><ul class="article-list"><li><a href="face-detection-vs-face-recognition.html">Face Detection vs. Face Recognition: What's the Difference?</a><p>Detection finds faces; recognition identifies people. Why the difference matters for privacy and law.</p></li><li><a href="how-browser-face-detection-works.html">How Browser Face Detection Works: MediaPipe and BlazeFace</a><p>A look under the hood at how a neural network finds faces in real time inside a web page.</p></li><li><a href="on-device-ai-and-privacy.html">On-Device AI and Privacy: Why Local Processing Matters</a><p>What it means when AI runs on your device, what it protects, and what it doesn't.</p></li><li><a href="tips-for-better-face-detection.html">Tips for Better Face Detection Results: Lighting, Angles and More</a><p>Practical ways to help a face detector find faces reliably in photos and live video.</p></li><li><a href="build-face-detection-web-app-mediapipe.html">Build a Face Detection Web App with MediaPipe: A Beginner Tutorial</a><p>Step-by-step: detect faces in images and webcam video in the browser with MediaPipe Tasks Vision.</p></li></ul>
-<!-- AdSense unit (article bottom) (disabled). Replace ca-pub-XXXXXXXX / data-ad-slot and uncomment:
-<div class="ad-slot">
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
--->
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Face<span>Vision</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <nav class="links" id="site-nav" aria-label="Site"><a href="../index.html">Home</a><a href="index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="content">
+<aside class="ad-slot" data-ad-slot="top" hidden></aside>
+<p class="eyebrow">Articles</p>
+<h1>Guides &amp; explainers</h1>
+<p class="sub">Plain-language articles about face detection, how it runs in your browser, and how to use it without collecting biometric data.</p>
+<ul class="article-list">
+<li><a class="card" href="camera-permissions-explained.html"><span class="card-title">Camera Permissions, Explained: What FaceVision Can and Cannot See</span><p>What the browser camera prompt means, what FaceVision can see after you allow it, and how to turn access off.</p></a></li>
+<li><a class="card" href="what-happens-to-your-photo.html"><span class="card-title">What Happens to Your Photo After You Close the Tab</span><p>Follow a photo through in-browser face detection: what is read in the tab, what is not uploaded, and what remains after you leave.</p></a></li>
+<li><a class="card" href="face-detection-on-phones-and-laptops.html"><span class="card-title">Face Detection on Phones vs Laptops: Cameras, Browsers and Lighting</span><p>Why the same face detector can behave differently on a phone and a laptop, and how to get more reliable results on each.</p></a></li>
+<li><a class="card" href="offer-face-detection-without-collecting-biometrics.html"><span class="card-title">How to Offer Face Detection Without Collecting Biometric Data</span><p>A practical checklist for product teams who want in-browser face detection without storing images, templates or identity data.</p></a></li>
+<li><a class="card" href="face-detection-vs-face-recognition.html"><span class="card-title">Face Detection vs. Face Recognition: What's the Difference?</span><p>Detection finds faces; recognition identifies people. Why the difference matters for privacy and law.</p></a></li>
+<li><a class="card" href="how-browser-face-detection-works.html"><span class="card-title">How Browser Face Detection Works: MediaPipe and BlazeFace</span><p>A look under the hood at how a neural network finds faces in real time inside a web page.</p></a></li>
+<li><a class="card" href="on-device-ai-and-privacy.html"><span class="card-title">On-Device AI and Privacy: Why Local Processing Matters</span><p>What it means when AI runs on your device, what it protects, and what it doesn't.</p></a></li>
+<li><a class="card" href="tips-for-better-face-detection.html"><span class="card-title">Tips for Better Face Detection Results: Lighting, Angles and More</span><p>Practical ways to help a face detector find faces reliably in photos and live video.</p></a></li>
+<li><a class="card" href="build-face-detection-web-app-mediapipe.html"><span class="card-title">Build a Face Detection Web App with MediaPipe: A Beginner Tutorial</span><p>Step-by-step: detect faces in images and webcam video in the browser with MediaPipe Tasks Vision.</p></a></li>
+</ul>
+<p class="cta-row"><a class="button primary" href="../index.html">Try the detector</a></p>
+
+<aside class="ad-slot" data-ad-slot="bottom" hidden></aside>
 </main>
-<footer><nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> · <a href="../articles/index.html">Articles</a> · <a href="../about.html">About</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a></nav>
-<p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 [Your Name]</p></footer>
+<footer>
+  <nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> <a href="index.html">Articles</a> <a href="../about.html">About</a> <a href="../privacy.html">Privacy</a> <a href="../terms.html">Terms</a> <a href="../contact.html">Contact</a></nav>
+  <p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 Kiana Cupit</p>
+</footer>
 </body></html>
