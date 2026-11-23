@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://facevision.js.org/sitemap.xml
+Sitemap: https://jalen3495-glitch.github.io/facevision/sitemap.xml
