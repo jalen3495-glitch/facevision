@@ -381,14 +381,14 @@ a.brand {
 }
 
 /* Ads — hidden until JS fills them */
-.ad-slot {
-  display: none;
+.ad-slot, .ad-slot.is-live {
+  display: block;
   margin: 28px auto;
   padding: 8px 0 16px;
   max-width: var(--max);
   text-align: center;
+  background: transparent;
 }
-.ad-slot.is-live { display: block; }
 .ad-slot .ad-label {
   display: block;
   font-size: 11px;
@@ -397,13 +397,18 @@ a.brand {
   color: var(--faint);
   margin-bottom: 8px;
 }
-.ad-frame { min-height: 0; display: flex; justify-content: center; }
-.ad-frame iframe, .ad-host {
+.ad-frame {
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  background: transparent;
+}
+.ad-frame iframe {
   display: block;
   margin: 0 auto;
   border: 0;
   max-width: 100%;
-  overflow: hidden;
   background: transparent;
 }
 

@@ -1,3 +1,4 @@
+// Live units are the official snippets in each page's HTML, not injected by JS.
 // FaceVision ad configuration — the only file you need to edit to turn ads on.
 // Leave values as empty strings ("") to show nothing. Empty slots are hidden.
 //
