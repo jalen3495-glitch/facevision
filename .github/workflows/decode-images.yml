@@ -34,8 +34,9 @@ jobs:
               name=$(basename "$f" .b64)
               base64 -d "$f" > "$branchdir/img/$name"
             done
-            # Keep the text source on both branches so the assets can be rebuilt
-            cp main/img/*.b64 "$branchdir/img/"
+            if [ "$branchdir" != "main" ]; then
+              cp main/img/*.b64 "$branchdir/img/"
+            fi
             cd "$branchdir"
             git add img/*.png img/*.b64
             if ! git diff --cached --quiet; then
