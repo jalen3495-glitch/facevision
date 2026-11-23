@@ -4,7 +4,7 @@ FaceVision is a browser-based **face detector**, not a facial-recognition or ide
 
 ## Architecture
 
-- `index.html`, `style.css`, `app.js`, `analytics.js`, `config.js`: static frontend; deployable to GitHub Pages.
+- `index.html`, `style.css`, `app.js`, `analytics.js`, `config.js`, `js/`: static frontend; deployable to GitHub Pages.
 - `server/server.js`: Node HTTP API and optional static-file server.
 - `server/init-db.js`: SQLite schema initializer.
 - `data/`: local SQLite database location; database files are ignored by Git.
@@ -67,4 +67,6 @@ GitHub Pages cannot run the Node API. Use GitHub Pages for the static frontend a
 
 ## Site pages and ads
 
-The static site also includes About, Privacy, Terms, Contact pages and an `articles/` section, plus `robots.txt`, `sitemap.xml`, and `ads.txt.example`. AdSense snippets are present but commented out. See `ADS.md` for domain, placeholder, consent, and AdSense steps.
+The static site includes About, Privacy, Terms, Contact, and an `articles/` section, plus `robots.txt`, `sitemap.xml`, `ads.txt`, a favicon and a social preview image. Ad slots are reserved in the page but stay empty until publisher codes are added in `js/ads-config.js`. See `ADS.md` for Adsterra, Monetag, HilltopAds and later AdSense steps.
+
+Live site: https://jalen3495-glitch.github.io/facevision/

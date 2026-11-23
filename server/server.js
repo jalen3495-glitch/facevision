@@ -117,22 +117,25 @@ function rateLimited(req) {
 const mime = {
   ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8",
   ".css": "text/css; charset=utf-8", ".json": "application/json; charset=utf-8",
-  ".svg": "image/svg+xml", ".ico": "image/x-icon",
+  ".svg": "image/svg+xml", ".ico": "image/x-icon", ".png": "image/png",
+  ".webmanifest": "application/manifest+json; charset=utf-8",
   ".txt": "text/plain; charset=utf-8", ".xml": "application/xml; charset=utf-8"
 };
 
 // Only the frontend files are public; never serve .env, data/*.sqlite, server code, etc.
 const PUBLIC_FILES = new Set([
-  "index.html", "app.js", "analytics.js", "config.js", "style.css",
+  "index.html", "404.html", "app.js", "analytics.js", "config.js", "style.css",
   "about.html", "privacy.html", "terms.html", "contact.html",
-  "ads.txt", "robots.txt", "sitemap.xml",
-  "articles/index.html",
-  "articles/face-detection-vs-face-recognition.html",
-  "articles/how-browser-face-detection-works.html",
-  "articles/on-device-ai-and-privacy.html",
-  "articles/tips-for-better-face-detection.html",
-  "articles/build-face-detection-web-app-mediapipe.html"
+  "ads.txt", "robots.txt", "sitemap.xml", "favicon.svg", "site.webmanifest"
 ]);
+const PUBLIC_PREFIXES = ["articles/", "js/", "img/"];
+const PUBLIC_EXTS = new Set([".html", ".js", ".css", ".svg", ".png", ".txt", ".xml", ".webmanifest", ".ico"]);
+
+function isPublicFile(rel) {
+  if (PUBLIC_FILES.has(rel)) return true;
+  if (rel.includes("..") || rel.includes("\\")) return false;
+  return PUBLIC_PREFIXES.some((prefix) => rel.startsWith(prefix)) && PUBLIC_EXTS.has(extname(rel));
+}
 
 async function serveStatic(req, res) {
   let requestPath;
@@ -143,7 +146,7 @@ async function serveStatic(req, res) {
   if (!filePath.startsWith(ROOT + "/") && filePath !== ROOT) return json(res, 403, { error: "forbidden" });
   let rel = filePath.slice(ROOT.length + 1) || "index.html";
   if (requestPath.endsWith("/") && rel !== "index.html") { rel = `${rel}/index.html`; filePath = join(filePath, "index.html"); }
-  if (!PUBLIC_FILES.has(rel)) return json(res, 404, { error: "not_found" });
+  if (!isPublicFile(rel)) return json(res, 404, { error: "not_found" });
   try {
     const info = await stat(filePath);
     if (info.isDirectory()) filePath = join(filePath, "index.html");
