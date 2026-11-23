@@ -1,2 +1,6 @@
-# Rename to ads.txt after AdSense approval and replace with your publisher ID.
-google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
+# Copy the official line(s) from your ad network into ads.txt.
+# Examples (replace the IDs; do not publish guessed values):
+# adsterra.com, YOUR_PUBLISHER_ID, DIRECT
+# monetag.com, YOUR_PUBLISHER_ID, DIRECT
+# hilltopads.com, YOUR_PUBLISHER_ID, DIRECT
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

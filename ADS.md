@@ -1,46 +1,55 @@
-# Making FaceVision ad-network ready
+# Making FaceVision ready for ads
 
-Nothing ad-related is active yet. All AdSense code is commented out, and every owner-specific value is a bracketed placeholder.
+Ad slots are built into the pages, but they stay hidden until you paste a publisher code into `js/ads-config.js`. No ad script loads while those fields are empty.
 
-## 1. Fill in the placeholders
-Search the project for these and replace them (e.g. `grep -rn "\[Your Name\]\|\[contact email\]\|\[yourdomain.com\]\|ca-pub-XXXXXXXX\|pub-XXXXXXXXXXXXXXXX\|0000000000" .`):
+Google AdSense does **not** accept `*.github.io` addresses. Until a custom domain such as facevision.js.org or facevision.eu.org is live, use a network that will review a GitHub Pages site.
 
-| Placeholder | Where | Replace with |
-|---|---|---|
-| `[Your Name]` | privacy, about, terms, footer on every page | Your name or business name |
-| `[contact email]` | privacy, contact (incl. `mailto:`), terms | A real inbox you check |
-| `[yourdomain.com]` | privacy, robots.txt, sitemap.xml | Your custom domain, e.g. `facevision.example` |
-| `ca-pub-XXXXXXXX` | `<head>` comment + ad-unit comments on every page | Your AdSense publisher ID (`ca-pub-…`) |
-| `data-ad-slot="0000000000"` | ad-unit comments | Ad unit IDs created in AdSense |
-| `pub-XXXXXXXXXXXXXXXX` | ads.txt.example | Your publisher ID (without `ca-`) |
+Pop-under, click-under and redirect ads are not enabled, even if you paste those tags. Use banner units only.
 
-## 2. Buy a domain and point GitHub Pages at it
-AdSense does not accept `*.github.io` subdomains.
-1. Buy a domain from any registrar (Cloudflare, Namecheap, Porkbun, etc.).
-2. Add a file named `CNAME` in the repo root containing only your domain, e.g. `facevision.example` (or set it in **Settings → Pages → Custom domain**, which creates the file).
-3. At your registrar, add DNS records: for an apex domain, `A` records to GitHub Pages' IPs (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153); for `www`, a `CNAME` to `<your-username>.github.io`. Check GitHub's current docs: https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site
-4. Enable **Enforce HTTPS** in Settings → Pages once the certificate is issued (camera access needs HTTPS).
+## 1. Sign up — start with Adsterra
 
-## 3. Update robots.txt and sitemap.xml
-Replace `[yourdomain.com]` in both files. If you add pages/articles, add them to `sitemap.xml`. Submit the sitemap in Google Search Console (optional but helps indexing).
+Adsterra is free to join, has no published traffic minimum, and does not state a ban on GitHub Pages. Approval is often quick. Payouts can start at $5 depending on the method (Paxum is commonly the lowest).
 
-## 4. Get some content and traffic first
-Publish the articles, add more over time, and share the site so it has real visitors before applying.
+1. Open **https://profit.adsterra.com/sign-up** and choose **Publisher** / "Start earning".
+2. Create the account with an email you check, accept the terms, and confirm the email they send.
+3. In the dashboard, add a website. Use the full live URL, including `https://`:
+   `https://jalen3495-glitch.github.io/facevision/`
+4. Pick the closest category (for example technology, software or education).
+5. Create **Banner** units only, in these sizes:
+   - 300×250 (medium rectangle)
+   - 728×90 (desktop leaderboard)
+   - 320×50 (mobile banner)
+6. Do **not** enable Popunder, Social Bar, or Smartlink for this site.
+7. Wait until the website status is Approved, then open **Get code** and copy the banner key (a 32-character hex string) or the official snippet for each size.
+8. Paste the keys into `js/ads-config.js` (`adsterra.key300x250`, `key728x90`, `key320x50`) and leave `network` set to `"adsterra"`.
+9. If Adsterra gives you an `ads.txt` line, replace the commented example in `ads.txt` with that exact line. They do not always require this file.
 
-## 5. Apply to AdSense
-1. Sign up at https://adsense.google.com with your domain.
-2. AdSense gives you a verification snippet: uncomment the `<script async src="https://pagead2.googlesyndication.com/...">` block in the `<head>` of every page and put your real `ca-pub-` ID in it.
-3. Rename `ads.txt.example` to `ads.txt`, put your publisher ID in it, and confirm it loads at `https://yourdomain/ads.txt`.
-4. Wait for review (can take days to weeks).
+Once the keys are in `js/ads-config.js` and the change is on the `gh-pages` branch, banners will appear in the reserved slots, each labelled "Advertisement".
 
-## 6. Enable a consent message (CMP) for EU/EEA/UK/Switzerland
-Google requires a Google-certified consent management platform for personalised ads to users in these regions. Easiest: AdSense → **Privacy & messaging → European regulations** → create and publish a GDPR consent message (Google's own CMP). Optionally also the US state regulations message. The privacy policy already describes this.
+## 2. Other free networks
 
-## 7. Turn on ad units after approval
-Uncomment the `<!-- AdSense unit ... -->` blocks:
-- `index.html`: the slot in `<section class="below-app">`, *below* the app. Never move an ad over or inside the camera/preview stage.
-- `articles/*.html`: slot at the bottom of each article.
-Replace `data-ad-slot` with unit IDs from AdSense, or skip units entirely and use Auto ads (just the head script).
+### Monetag
 
-## 8. Optional Node server
-`server/server.js` whitelists the new public files (pages, articles, robots.txt, sitemap.xml, ads.txt). If you add new pages and serve them via Node, add them to `PUBLIC_FILES`. `.env`, `data/*.sqlite`, and server code are never served.
+Sign up at **https://publishers.monetag.com/signUp**. Monetag is also free and has no published traffic minimum, but its FAQ says free hosted platforms are not supported and a self-hosted domain is required. A `github.io` site may be rejected. Try Monetag after a custom domain is live, or apply and be prepared to wait for a custom domain if they refuse.
+
+If they approve the site, they may ask you to add a `sw.js` file or a verification meta tag. Send that to the site maintainer rather than pasting a popunder tag. Then put a banner/in-page zone script URL in `js/ads-config.js` (`monetag.zoneScriptSrc`) and set `network` to `"monetag"`.
+
+### HilltopAds
+
+A backup option: **https://hilltopads.com/signup** (choose Publisher). They verify the site with a file or a meta tag. If they approve it, create banner units only, and paste the official snippet into the `custom` slots in `js/ads-config.js` with `network` set to `"custom"`.
+
+### Google AdSense (later, on a custom domain)
+
+Apply at **https://www.google.com/adsense/** only after the site is served on a registrable domain AdSense will accept (not `github.io` or, typically, `js.org`). Keep the banner-only approach. Put their `ads.txt` line in `ads.txt` when they give you one.
+
+## 3. After approval, what to send
+
+You do not need to edit the HTML. Send one of the following and it can be pasted for you:
+
+- the three Adsterra banner keys, or
+- the official Get Code snippet for each banner size, or
+- an official `ads.txt` line, if the network provided one
+
+## 4. Placeholders already filled
+
+Legal and contact pages use **Kiana Cupit** and **kianajones3002-knt9hz@mail.grokbot.com**. The live canonical URL is `https://jalen3495-glitch.github.io/facevision/`.
