@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Face Detection on Phones vs Laptops: Cameras, Browsers and Lighting — FaceVision</title>
+<meta name="description" content="Why the same face detector can behave differently on a phone and a laptop, and how to get more reliable results on each.">
+<link rel="canonical" href="https://jalen3495-glitch.github.io/facevision/articles/face-detection-on-phones-and-laptops.html">
+<meta name="theme-color" content="#080a10">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="FaceVision">
+<meta property="og:title" content="Face Detection on Phones vs Laptops: Cameras, Browsers and Lighting — FaceVision">
+<meta property="og:description" content="Why the same face detector can behave differently on a phone and a laptop, and how to get more reliable results on each.">
+<meta property="og:url" content="https://jalen3495-glitch.github.io/facevision/articles/face-detection-on-phones-and-laptops.html">
+<meta property="og:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="og:image:alt" content="FaceVision — detect faces in your browser. Your photo stays on your device.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Face Detection on Phones vs Laptops: Cameras, Browsers and Lighting — FaceVision">
+<meta name="twitter:description" content="Why the same face detector can behave differently on a phone and a laptop, and how to get more reliable results on each.">
+<meta name="twitter:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="article:published_time" content="2026-11-23">
+<meta property="article:author" content="Kiana Cupit">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Face Detection on Phones vs Laptops: Cameras, Browsers and Lighting",
+  "description": "Why the same face detector can behave differently on a phone and a laptop, and how to get more reliable results on each.",
+  "datePublished": "2026-11-23",
+  "dateModified": "2026-11-23",
+  "author": {
+    "@type": "Person",
+    "name": "Kiana Cupit"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "FaceVision",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jalen3495-glitch.github.io/facevision/img/icon-192.png"
+    }
+  },
+  "mainEntityOfPage": "https://jalen3495-glitch.github.io/facevision/articles/face-detection-on-phones-and-laptops.html",
+  "image": "https://jalen3495-glitch.github.io/facevision/img/og-image.png"
+}
+</script>
+<script src="../js/ads-config.js" defer></script>
+<script src="../js/ads.js" defer></script>
+<script src="../js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Face<span>Vision</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <nav class="links" id="site-nav" aria-label="Site"><a href="../index.html">Home</a><a href="index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="content">
+<aside class="ad-slot" data-ad-slot="top" hidden></aside>
+<article>
+<p class="eyebrow">Article</p>
+<h1>Face Detection on Phones vs Laptops: Cameras, Browsers and Lighting</h1>
+<p class="meta">Published November 23, 2026</p>
+<p>The same FaceVision page should work on a phone and a laptop, but the results will not always look the same. The difference is less about the website and more about the camera, the browser, and how close you sit to the lens.</p>
+
+<h2>The model is tuned for nearby faces</h2>
+<p>FaceVision uses MediaPipe's short-range BlazeFace model. It is designed for faces that fill a good part of the frame — a selfie, a webcam call, a portrait taken a metre or so away. Distant faces in a group photo, or a person across a room on a wide laptop camera, are easier to miss.</p>
+<p>On a phone, the front camera usually helps, because you naturally hold the device at arm's length. On a laptop, sliding closer or using a photo instead of the built-in webcam often produces a more reliable box.</p>
+
+<h2>Front and rear cameras</h2>
+<p>When you tap "Use camera" on a phone, FaceVision asks the browser for a user-facing camera. That is the lens you use for selfies. Some devices also have a rear camera that is sharper in low light. If the front camera is poor, take a still photo with the rear camera and choose that image instead.</p>
+<p>Laptops typically have one webcam, often wide-angle and modest in low light. Backlighting from a window behind you is a common reason faces wash out. Face the window, or add a lamp in front of you, before blaming the detector. Our <a href="tips-for-better-face-detection.html">lighting and angle tips</a> cover the practical fixes.</p>
+
+<h2>Browser quirks worth knowing</h2>
+<ul>
+<li><strong>Safari on iPhone</strong> needs the video element to be muted and to use <code>playsinline</code>, otherwise the stream can open in fullscreen or refuse to play inside the page. FaceVision sets both.</li>
+<li><strong>A user gesture is required.</strong> The camera starts only after you choose to allow it. A page cannot autoplay your camera on load.</li>
+<li><strong>HTTPS is required</strong> on both phones and laptops, except for localhost during development.</li>
+<li><strong>Performance</strong> varies. A recent phone GPU can keep up with live detection comfortably. An older laptop on battery, or a tab in the background, may drop frames. The boxes might lag a little; that is the device doing less work, not a different model.</li>
+</ul>
+
+<h2>Choosing a photo can be the better path</h2>
+<p>Live detection is useful for a quick check, but a still image is often clearer. You can pick a sharper frame, avoid handshake, and skip the permission prompt. On a phone, "Choose image" can open your library, including pictures taken with the rear camera.</p>
+<p>You can also drop a file onto the preview on a laptop, which is handy when the photo is already on your desktop.</p>
+
+<h2>If results disagree between devices</h2>
+<p>If the same person is detected on a phone photo but missed on a laptop webcam, it is usually distance, lighting, or motion, not a different algorithm. Try a still photo on both, in good front light, with the face fairly large in the frame. If a face is still missed, the short-range model may simply be the wrong tool for that picture — for example a small face in a wide landscape.</p>
+<p>For the technical background, see <a href="how-browser-face-detection-works.html">how browser face detection works</a>.</p>
+<p class="back"><a href="index.html">← All articles</a> · <a href="../index.html">Try FaceVision</a></p>
+</article>
+<aside class="ad-slot" data-ad-slot="mid" hidden></aside>
+<aside class="ad-slot" data-ad-slot="bottom" hidden></aside>
+</main>
+<footer>
+  <nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> <a href="index.html">Articles</a> <a href="../about.html">About</a> <a href="../privacy.html">Privacy</a> <a href="../terms.html">Terms</a> <a href="../contact.html">Contact</a></nav>
+  <p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 Kiana Cupit</p>
+</footer>
+</body></html>

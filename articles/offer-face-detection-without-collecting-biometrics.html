@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to Offer Face Detection Without Collecting Biometric Data — FaceVision</title>
+<meta name="description" content="A practical checklist for product teams who want in-browser face detection without storing images, templates or identity data.">
+<link rel="canonical" href="https://jalen3495-glitch.github.io/facevision/articles/offer-face-detection-without-collecting-biometrics.html">
+<meta name="theme-color" content="#080a10">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="FaceVision">
+<meta property="og:title" content="How to Offer Face Detection Without Collecting Biometric Data — FaceVision">
+<meta property="og:description" content="A practical checklist for product teams who want in-browser face detection without storing images, templates or identity data.">
+<meta property="og:url" content="https://jalen3495-glitch.github.io/facevision/articles/offer-face-detection-without-collecting-biometrics.html">
+<meta property="og:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="og:image:alt" content="FaceVision — detect faces in your browser. Your photo stays on your device.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Offer Face Detection Without Collecting Biometric Data — FaceVision">
+<meta name="twitter:description" content="A practical checklist for product teams who want in-browser face detection without storing images, templates or identity data.">
+<meta name="twitter:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="article:published_time" content="2026-11-23">
+<meta property="article:author" content="Kiana Cupit">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Offer Face Detection Without Collecting Biometric Data",
+  "description": "A practical checklist for product teams who want in-browser face detection without storing images, templates or identity data.",
+  "datePublished": "2026-11-23",
+  "dateModified": "2026-11-23",
+  "author": {
+    "@type": "Person",
+    "name": "Kiana Cupit"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "FaceVision",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jalen3495-glitch.github.io/facevision/img/icon-192.png"
+    }
+  },
+  "mainEntityOfPage": "https://jalen3495-glitch.github.io/facevision/articles/offer-face-detection-without-collecting-biometrics.html",
+  "image": "https://jalen3495-glitch.github.io/facevision/img/og-image.png"
+}
+</script>
+<script src="../js/ads-config.js" defer></script>
+<script src="../js/ads.js" defer></script>
+<script src="../js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Face<span>Vision</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <nav class="links" id="site-nav" aria-label="Site"><a href="../index.html">Home</a><a href="index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="content">
+<aside class="ad-slot" data-ad-slot="top" hidden></aside>
+<article>
+<p class="eyebrow">Article</p>
+<h1>How to Offer Face Detection Without Collecting Biometric Data</h1>
+<p class="meta">Published November 23, 2026</p>
+<p>Plenty of products want to find faces in a picture: to blur a background, to crop a portrait, or to show a teaching demo. Collecting a database of faces is a different product, with a different legal and ethical weight. This checklist is for teams who want the first without slipping into the second.</p>
+<p>It is written from the same design choices as FaceVision, and it is not legal advice. Privacy law varies by country, and some regulators treat face geometry as biometric data even if you never try to identify anyone. If you handle real users, talk to a lawyer who knows that ground.</p>
+
+<h2>1. Say clearly what the tool does — and does not do</h2>
+<p>Use the words "face detection" if you only find a box. Do not say "recognition", "identification" or "face ID" unless you actually match a person to an identity. Put that limit in the interface, not only in a policy page. People decide whether to grant a camera based on what they see first.</p>
+
+<h2>2. Keep inference on the device when you can</h2>
+<p>If a model is small enough to run in the browser or a mobile app, you can avoid uploading the picture at all. That single decision removes a large class of risk: no image sitting on your server, no backup tape, no staff laptop with a copy. FaceVision uses MediaPipe's Face Detector in the page for this reason.</p>
+<p>On-device processing is not a complete privacy shield. You still download a model, and the CDN may see an IP address. But it does stop the photo itself becoming your data problem. See also <a href="on-device-ai-and-privacy.html">On-device AI and privacy</a>.</p>
+
+<h2>3. Do not store coordinates "just in case"</h2>
+<p>It is tempting to log bounding boxes, landmarks or embeddings for debugging. Those values can still be personal data, and embeddings are especially sensitive because they can support later matching. If you need to debug, reproduce the issue with a picture the user has agreed you may see, or with a picture of your own staff, and then delete it.</p>
+<p>If you must measure product quality, prefer coarse events: "a photo was analysed", "zero faces", "one face", "several faces". That is enough to know whether the detector is working, without keeping a face print.</p>
+
+<h2>4. Ask for the camera only when you need it, and stop it promptly</h2>
+<p>Request video only, not the microphone, unless audio is part of the feature. Explain the request in your own UI before the browser prompt. Stop the tracks when the user leaves, hides the tab, or taps stop — do not leave the shutter open in the background.</p>
+<p>Offer a file picker as a first-class alternative. Many people would rather choose a still photo than grant a live camera.</p>
+
+<h2>5. Be careful with third-party scripts</h2>
+<p>Analytics, advertising and "session replay" tools can capture more than you intended, including pixels of a video preview. Do not place ads over the camera view. Review vendors so they are not recording the preview. If you show ads, load them only when you have a publisher code, and prefer ordinary banners over pop-unders or redirects.</p>
+
+<h2>6. Write a policy that matches the code</h2>
+<p>If your privacy policy says images never leave the device, make sure no fallback path uploads them when the WebAssembly model fails to load. A "just send it to the server this once" branch is how these promises break. Fail visibly instead, and let the user retry.</p>
+
+<h2>7. Do not use detection as a gateway to decisions about people</h2>
+<p>Even a simple box-drawer can be misused: to gate access, to watch a room, or to filter who appears in a feed. If that is your product, you need a different review, and likely a different legal basis, than a self-serve photo tool. FaceVision's terms ask people not to use it for identification, surveillance or decisions such as hiring or access control. Your own terms should be just as direct.</p>
+
+<h2>A compact test</h2>
+<p>Before you ship, ask: if a regulator or a journalist requested "all face data we hold about a user", would the honest answer be "we do not have any"? If you have to add "except the logs" or "except the embeddings we kept for quality", the design is not finished.</p>
+<p class="back"><a href="index.html">← All articles</a> · <a href="../index.html">Try FaceVision</a></p>
+</article>
+<aside class="ad-slot" data-ad-slot="mid" hidden></aside>
+<aside class="ad-slot" data-ad-slot="bottom" hidden></aside>
+</main>
+<footer>
+  <nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> <a href="index.html">Articles</a> <a href="../about.html">About</a> <a href="../privacy.html">Privacy</a> <a href="../terms.html">Terms</a> <a href="../contact.html">Contact</a></nav>
+  <p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 Kiana Cupit</p>
+</footer>
+</body></html>

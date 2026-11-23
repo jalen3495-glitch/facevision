@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Happens to Your Photo After You Close the Tab — FaceVision</title>
+<meta name="description" content="Follow a photo through in-browser face detection: what is read in the tab, what is not uploaded, and what remains after you leave.">
+<link rel="canonical" href="https://jalen3495-glitch.github.io/facevision/articles/what-happens-to-your-photo.html">
+<meta name="theme-color" content="#080a10">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="FaceVision">
+<meta property="og:title" content="What Happens to Your Photo After You Close the Tab — FaceVision">
+<meta property="og:description" content="Follow a photo through in-browser face detection: what is read in the tab, what is not uploaded, and what remains after you leave.">
+<meta property="og:url" content="https://jalen3495-glitch.github.io/facevision/articles/what-happens-to-your-photo.html">
+<meta property="og:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="og:image:alt" content="FaceVision — detect faces in your browser. Your photo stays on your device.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What Happens to Your Photo After You Close the Tab — FaceVision">
+<meta name="twitter:description" content="Follow a photo through in-browser face detection: what is read in the tab, what is not uploaded, and what remains after you leave.">
+<meta name="twitter:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="article:published_time" content="2026-11-23">
+<meta property="article:author" content="Kiana Cupit">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What Happens to Your Photo After You Close the Tab",
+  "description": "Follow a photo through in-browser face detection: what is read in the tab, what is not uploaded, and what remains after you leave.",
+  "datePublished": "2026-11-23",
+  "dateModified": "2026-11-23",
+  "author": {
+    "@type": "Person",
+    "name": "Kiana Cupit"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "FaceVision",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jalen3495-glitch.github.io/facevision/img/icon-192.png"
+    }
+  },
+  "mainEntityOfPage": "https://jalen3495-glitch.github.io/facevision/articles/what-happens-to-your-photo.html",
+  "image": "https://jalen3495-glitch.github.io/facevision/img/og-image.png"
+}
+</script>
+<script src="../js/ads-config.js" defer></script>
+<script src="../js/ads.js" defer></script>
+<script src="../js/site.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Face<span>Vision</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <nav class="links" id="site-nav" aria-label="Site"><a href="../index.html">Home</a><a href="index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="content">
+<aside class="ad-slot" data-ad-slot="top" hidden></aside>
+<article>
+<p class="eyebrow">Article</p>
+<h1>What Happens to Your Photo After You Close the Tab</h1>
+<p class="meta">Published November 23, 2026</p>
+<p>If you pick a photo for face detection, it is reasonable to ask where that file goes. This article follows a picture through FaceVision, from the moment you choose it to the moment you close the tab.</p>
+
+<h2>The short answer</h2>
+<p>FaceVision reads the photo in your browser so it can draw boxes on a preview. It does not upload the file to our servers, and it does not write the picture into a database. When you close the tab, that preview is discarded with the page.</p>
+<p>That is the design. The rest of this article explains the few exceptions that are easy to misunderstand.</p>
+
+<h2>What "choosing a photo" actually does</h2>
+<p>When you tap "Choose image" or drop a file onto the preview, the browser does not send the file to a folder on our host. JavaScript creates a temporary local address, called an object URL, that points at the file already on your device. The image tag on the page reads from that address. The detector then looks at the pixels in that image element.</p>
+<p>You should see the same picture you selected, with boxes overlaid. Those boxes are drawn on a canvas in the page. They are not baked into a new file unless you take a screenshot yourself.</p>
+
+<h2>What is not stored</h2>
+<p>FaceVision does not keep:</p>
+<ul>
+<li>the photo file;</li>
+<li>face coordinates or landmarks;</li>
+<li>a face template or embedding that could be used later to recognise someone;</li>
+<li>your name, or any caption you did not type (you are not asked to type one).</li>
+</ul>
+<p>If you leave optional analytics switched off, which is the default, we also do not record that you analysed a picture. If you switch analytics on, and if an analytics server has been configured, the site may send a coarse event such as "a photo was analysed and the detector found 1 face". That event does not include the image.</p>
+
+<h2>What can still linger on your own device</h2>
+<p>Your device and browser may still hold traces that we do not control:</p>
+<ul>
+<li><strong>The original file</strong> stays in your photos or downloads, exactly where it was. We never needed a copy of that folder.</li>
+<li><strong>Memory and cache.</strong> While the tab is open, the decoded image sits in the page's memory. Browsers can also cache the FaceVision page itself, and the detection model, so the tool loads faster next time. Caching the model is not the same as caching your photo.</li>
+<li><strong>Screenshots and screen recordings</strong> that you, or another app, take of the preview are ordinary pictures on your device or in that other app.</li>
+<li><strong>localStorage</strong> may remember only your analytics preference, not the photo.</li>
+</ul>
+
+<h2>Closing the tab, and opening another one</h2>
+<p>On close, FaceVision revokes the temporary object URL and stops any camera tracks. A new visit starts with an empty preview. We cannot "reload your last photo" because we never stored it.</p>
+<p>If you want to analyse the same picture again, you choose the file once more from your device.</p>
+
+<h2>A note about the model download</h2>
+<p>The first time you load the detector, your browser downloads a library and a model from public CDNs. Those providers can see a normal web request (for example an IP address and user agent), the same way they would for any other file on a website. They do not receive the photo you selected. For the wider privacy picture, see <a href="on-device-ai-and-privacy.html">On-device AI and privacy</a>.</p>
+<p class="back"><a href="index.html">← All articles</a> · <a href="../index.html">Try FaceVision</a></p>
+</article>
+<aside class="ad-slot" data-ad-slot="mid" hidden></aside>
+<aside class="ad-slot" data-ad-slot="bottom" hidden></aside>
+</main>
+<footer>
+  <nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> <a href="index.html">Articles</a> <a href="../about.html">About</a> <a href="../privacy.html">Privacy</a> <a href="../terms.html">Terms</a> <a href="../contact.html">Contact</a></nav>
+  <p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 Kiana Cupit</p>
+</footer>
+</body></html>

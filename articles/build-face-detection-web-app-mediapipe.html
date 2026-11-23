@@ -1,18 +1,72 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Build a Face Detection Web App with MediaPipe: A Beginner Tutorial — FaceVision</title>
 <meta name="description" content="Step-by-step: detect faces in images and webcam video in the browser with MediaPipe Tasks Vision.">
+<link rel="canonical" href="https://jalen3495-glitch.github.io/facevision/articles/build-face-detection-web-app-mediapipe.html">
+<meta name="theme-color" content="#080a10">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="FaceVision">
+<meta property="og:title" content="Build a Face Detection Web App with MediaPipe: A Beginner Tutorial — FaceVision">
+<meta property="og:description" content="Step-by-step: detect faces in images and webcam video in the browser with MediaPipe Tasks Vision.">
+<meta property="og:url" content="https://jalen3495-glitch.github.io/facevision/articles/build-face-detection-web-app-mediapipe.html">
+<meta property="og:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="og:image:alt" content="FaceVision — detect faces in your browser. Your photo stays on your device.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build a Face Detection Web App with MediaPipe: A Beginner Tutorial — FaceVision">
+<meta name="twitter:description" content="Step-by-step: detect faces in images and webcam video in the browser with MediaPipe Tasks Vision.">
+<meta name="twitter:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="article:published_time" content="2026-10-24">
+<meta property="article:author" content="Kiana Cupit">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
 <link rel="stylesheet" href="../style.css">
-<!-- AdSense (disabled). After approval, replace ca-pub-XXXXXXXX and uncomment:
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
--->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Build a Face Detection Web App with MediaPipe: A Beginner Tutorial",
+  "description": "Step-by-step: detect faces in images and webcam video in the browser with MediaPipe Tasks Vision.",
+  "datePublished": "2026-10-24",
+  "dateModified": "2026-11-23",
+  "author": {
+    "@type": "Person",
+    "name": "Kiana Cupit"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "FaceVision",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jalen3495-glitch.github.io/facevision/img/icon-192.png"
+    }
+  },
+  "mainEntityOfPage": "https://jalen3495-glitch.github.io/facevision/articles/build-face-detection-web-app-mediapipe.html",
+  "image": "https://jalen3495-glitch.github.io/facevision/img/og-image.png"
+}
+</script>
+<script src="../js/ads-config.js" defer></script>
+<script src="../js/ads.js" defer></script>
+<script src="../js/site.js" defer></script>
 </head>
 <body>
-<header class="nav"><a class="brand" href="../index.html">Face<span>Vision</span></a>
-<nav class="links" aria-label="Site"><a href="../index.html">Home</a><a href="../articles/index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav></header>
-<main class="content">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Face<span>Vision</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <nav class="links" id="site-nav" aria-label="Site"><a href="../index.html">Home</a><a href="index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="content">
+<aside class="ad-slot" data-ad-slot="top" hidden></aside>
 <article><p class="eyebrow">ARTICLE</p><h1>Build a Face Detection Web App with MediaPipe: A Beginner Tutorial</h1>
 <p>In this tutorial you'll build a small web page that detects faces in a photo and in your webcam feed, entirely in the browser. It follows the same approach FaceVision uses: MediaPipe Tasks Vision loaded as a JavaScript module, the BlazeFace short-range model, and a canvas overlay for the results. You only need a text editor, a modern browser and basic HTML and JavaScript knowledge.</p>
 <h2>Step 1: Set up the files</h2>
@@ -115,13 +169,11 @@ document.getElementById("cam").addEventListener("click", async () =&gt; {
 <h2>Next steps</h2>
 <p>Read Google's <a href="https://ai.google.dev/edge/mediapipe/solutions/vision/face_detector/web_js" rel="noopener">Face Detector guide for web</a> for all options, or try the finished version: <a href="../index.html">FaceVision</a>.</p>
 <p class="back"><a href="index.html">← All articles</a> · <a href="../index.html">Try FaceVision</a></p></article>
-<!-- AdSense unit (article bottom) (disabled). Replace ca-pub-XXXXXXXX / data-ad-slot and uncomment:
-<div class="ad-slot">
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
--->
+<aside class="ad-slot" data-ad-slot="mid" hidden></aside>
+<aside class="ad-slot" data-ad-slot="bottom" hidden></aside>
 </main>
-<footer><nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> · <a href="../articles/index.html">Articles</a> · <a href="../about.html">About</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a></nav>
-<p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 [Your Name]</p></footer>
+<footer>
+  <nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> <a href="index.html">Articles</a> <a href="../about.html">About</a> <a href="../privacy.html">Privacy</a> <a href="../terms.html">Terms</a> <a href="../contact.html">Contact</a></nav>
+  <p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 Kiana Cupit</p>
+</footer>
 </body></html>
