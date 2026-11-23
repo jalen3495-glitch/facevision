@@ -1,18 +1,72 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How Browser Face Detection Works: MediaPipe and BlazeFace — FaceVision</title>
 <meta name="description" content="A look under the hood at how a neural network finds faces in real time inside a web page.">
+<link rel="canonical" href="https://jalen3495-glitch.github.io/facevision/articles/how-browser-face-detection-works.html">
+<meta name="theme-color" content="#080a10">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="FaceVision">
+<meta property="og:title" content="How Browser Face Detection Works: MediaPipe and BlazeFace — FaceVision">
+<meta property="og:description" content="A look under the hood at how a neural network finds faces in real time inside a web page.">
+<meta property="og:url" content="https://jalen3495-glitch.github.io/facevision/articles/how-browser-face-detection-works.html">
+<meta property="og:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="og:image:alt" content="FaceVision — detect faces in your browser. Your photo stays on your device.">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How Browser Face Detection Works: MediaPipe and BlazeFace — FaceVision">
+<meta name="twitter:description" content="A look under the hood at how a neural network finds faces in real time inside a web page.">
+<meta name="twitter:image" content="https://jalen3495-glitch.github.io/facevision/img/og-image.png">
+<meta property="article:published_time" content="2026-10-24">
+<meta property="article:author" content="Kiana Cupit">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+<link rel="manifest" href="../site.webmanifest">
 <link rel="stylesheet" href="../style.css">
-<!-- AdSense (disabled). After approval, replace ca-pub-XXXXXXXX and uncomment:
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX" crossorigin="anonymous"></script>
--->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How Browser Face Detection Works: MediaPipe and BlazeFace",
+  "description": "A look under the hood at how a neural network finds faces in real time inside a web page.",
+  "datePublished": "2026-10-24",
+  "dateModified": "2026-11-23",
+  "author": {
+    "@type": "Person",
+    "name": "Kiana Cupit"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "FaceVision",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jalen3495-glitch.github.io/facevision/img/icon-192.png"
+    }
+  },
+  "mainEntityOfPage": "https://jalen3495-glitch.github.io/facevision/articles/how-browser-face-detection-works.html",
+  "image": "https://jalen3495-glitch.github.io/facevision/img/og-image.png"
+}
+</script>
+<script src="../js/ads-config.js" defer></script>
+<script src="../js/ads.js" defer></script>
+<script src="../js/site.js" defer></script>
 </head>
 <body>
-<header class="nav"><a class="brand" href="../index.html">Face<span>Vision</span></a>
-<nav class="links" aria-label="Site"><a href="../index.html">Home</a><a href="../articles/index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav></header>
-<main class="content">
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Face<span>Vision</span></a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <nav class="links" id="site-nav" aria-label="Site"><a href="../index.html">Home</a><a href="index.html">Articles</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a><a href="../contact.html">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="content">
+<aside class="ad-slot" data-ad-slot="top" hidden></aside>
 <article><p class="eyebrow">ARTICLE</p><h1>How Browser Face Detection Works: MediaPipe and BlazeFace</h1>
 <p>A few years ago, running a neural network on live video meant a powerful computer or a cloud server. Today a web page can find faces in your webcam feed many times per second, without installing anything and without sending a single frame off your device. Here is how that works, using the stack FaceVision is built on: Google's MediaPipe and the BlazeFace model.</p>
 <h2>The pieces</h2>
@@ -64,13 +118,11 @@
 <h2>Why it runs locally</h2>
 <p>The model file and library are downloaded once, then everything happens on your machine. Your photos never need to travel anywhere to be analysed. That combination of speed and privacy is what makes in-browser detection so appealing. Read more in our article on <a href="on-device-ai-and-privacy.html">on-device AI and privacy</a>.</p>
 <p class="back"><a href="index.html">← All articles</a> · <a href="../index.html">Try FaceVision</a></p></article>
-<!-- AdSense unit (article bottom) (disabled). Replace ca-pub-XXXXXXXX / data-ad-slot and uncomment:
-<div class="ad-slot">
-<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXXXXXX" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
--->
+<aside class="ad-slot" data-ad-slot="mid" hidden></aside>
+<aside class="ad-slot" data-ad-slot="bottom" hidden></aside>
 </main>
-<footer><nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> · <a href="../articles/index.html">Articles</a> · <a href="../about.html">About</a> · <a href="../privacy.html">Privacy</a> · <a href="../terms.html">Terms</a> · <a href="../contact.html">Contact</a></nav>
-<p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 [Your Name]</p></footer>
+<footer>
+  <nav class="foot-links" aria-label="Footer"><a href="../index.html">Home</a> <a href="index.html">Articles</a> <a href="../about.html">About</a> <a href="../privacy.html">Privacy</a> <a href="../terms.html">Terms</a> <a href="../contact.html">Contact</a></nav>
+  <p>FaceVision • MediaPipe Face Detector 1.0.1 • © 2026 Kiana Cupit</p>
+</footer>
 </body></html>
