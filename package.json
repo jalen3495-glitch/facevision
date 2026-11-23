@@ -11,7 +11,7 @@
     "start": "node server/server.js",
     "dev": "node --watch server/server.js",
     "db:init": "node server/init-db.js",
-    "check": "node --check app.js && node --check analytics.js && node --check server/server.js && node --check server/init-db.js"
+    "check": "node --check app.js && node --check analytics.js && node --check js/ads-config.js && node --check js/ads.js && node --check js/site.js && node --check server/server.js && node --check server/init-db.js"
   },
   "dependencies": {}
 }
