@@ -29,11 +29,15 @@ jobs:
         run: npm run check
       - name: Build static site (frontend files only)
         run: |
-          mkdir -p _site/articles
-          cp index.html about.html privacy.html terms.html contact.html app.js analytics.js config.js style.css robots.txt sitemap.xml .nojekyll _site/
+          mkdir -p _site/articles _site/js _site/img
+          cp index.html about.html privacy.html terms.html contact.html 404.html app.js analytics.js config.js style.css robots.txt sitemap.xml ads.txt .nojekyll favicon.svg site.webmanifest _site/
           cp articles/*.html _site/articles/
-          if [ -f ads.txt ]; then cp ads.txt _site/; fi
-          if [ -f CNAME ]; then cp CNAME _site/; fi
+          cp js/*.js _site/js/
+          cp img/*.png _site/img/ 2>/dev/null || true
+          cp img/*.svg _site/img/ 2>/dev/null || true
+          # Do not copy CNAME until facevision.js.org (or another custom domain) is approved.
+          # Re-enable the next line after the custom domain is live:
+          # if [ -f CNAME ]; then cp CNAME _site/; fi
       - uses: actions/configure-pages@v5
         with:
           enablement: true
