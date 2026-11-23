@@ -398,6 +398,15 @@ a.brand {
   margin-bottom: 8px;
 }
 .ad-frame { min-height: 0; display: flex; justify-content: center; }
+.ad-frame iframe, .ad-host {
+  display: block;
+  margin: 0 auto;
+  border: 0;
+  max-width: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
 
 /* Footer */
 footer {
