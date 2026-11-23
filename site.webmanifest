@@ -1,0 +1,15 @@
+{
+  "name": "FaceVision",
+  "short_name": "FaceVision",
+  "description": "Private, in-browser face detection. Your photo stays on your device.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#080a10",
+  "theme_color": "#080a10",
+  "icons": [
+    { "src": "favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" },
+    { "src": "img/favicon-32.png", "type": "image/png", "sizes": "32x32" },
+    { "src": "img/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "img/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" }
+  ]
+}
