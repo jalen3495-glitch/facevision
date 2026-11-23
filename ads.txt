@@ -1,0 +1,21 @@
+# FaceVision ads.txt
+# This file tells advertisers who is allowed to sell ads on this site.
+# It is a placeholder until a publisher account is approved.
+#
+# After you sign up and the network approves the site, replace the
+# commented examples below with the exact line(s) they give you.
+# Do not guess an account ID. If a network does not use ads.txt,
+# leave this file as comments only.
+#
+# Adsterra (ask support or check the publisher dashboard for your line):
+# adsterra.com, YOUR_PUBLISHER_ID, DIRECT
+#
+# Monetag / Propeller Ads (only if they approve your domain):
+# monetag.com, YOUR_PUBLISHER_ID, DIRECT
+#
+# HilltopAds (only if they approve your domain):
+# hilltopads.com, YOUR_PUBLISHER_ID, DIRECT
+#
+# Google AdSense (only after you have a custom domain AdSense will accept,
+# not a github.io address, and after they approve the site):
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
